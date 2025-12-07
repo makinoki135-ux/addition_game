@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>足し算アローゲーム (タッチ版)</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> 
-    <style>
-        /* 全体のレイアウト設定 */
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <style>
         body {
             font-family: 'Arial', sans-serif;
             display: flex;
@@ -13,10 +11,7 @@
             align-items: center;
             background-color: #f4f7f6;
             padding: 20px;
-            /* ページ全体の拡大を防ぐため、ビューポートのサイズを固定 */
-            touch-action: manipulation;
         }
-        /* ゲームエリアのスタイル */
         #game-area {
             background-color: #ffffff;
             border: 2px solid #333;
@@ -24,13 +19,12 @@
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
-            width: 90%; 
-            max-width: 400px; /* 縦画面を想定 */
+            width: 90%; /* 画面幅に合わせて調整 */
+            max-width: 400px;
         }
         h1 {
             font-size: 28px;
         }
-        /* スコアと時間の表示エリア */
         #status-bar {
             display: flex;
             justify-content: space-around;
@@ -38,7 +32,6 @@
             font-size: 20px;
             margin-bottom: 20px;
         }
-        /* 数字の表示エリア */
         #numbers {
             display: flex;
             justify-content: center;
@@ -59,21 +52,20 @@
         .message {
             margin-top: 15px;
             font-size: 18px;
+            color: #d9534f;
             height: 25px;
         }
-        /* 操作ボタンの配置 */
         #controls {
             margin-top: 20px;
             display: grid;
             grid-template-areas:
                 ". up ."
                 "left down right"
-                ". instructions ."; /* 十字キー状に配置 */
+                ". instructions ."; /* 操作ボタンを十字キーのように配置 */
             gap: 10px;
             width: 250px;
             margin: 20px auto;
         }
-        /* 操作ボタンの共通スタイル */
         .control-button {
             padding: 15px;
             font-size: 24px;
@@ -84,20 +76,17 @@
             border-radius: 8px;
             box-shadow: 0 4px #e68900;
             cursor: pointer;
-            user-select: none; /* タップ時の文字選択を防ぐ */
+            user-select: none; /* タップ時の選択を防ぐ */
         }
-        /* タップ時のエフェクト */
         .control-button:active {
             box-shadow: 0 0 #e68900;
-            transform: translateY(4px); 
+            transform: translateY(4px); /* タップ時の沈み込みエフェクト */
         }
-        /* グリッドエリアの割り当て */
         #up-btn { grid-area: up; }
         #down-btn { grid-area: down; }
         #left-btn { grid-area: left; }
         #right-btn { grid-area: right; }
 
-        /* スタートボタンのスタイル */
         #start-button {
             padding: 10px 20px;
             font-size: 18px;
@@ -108,7 +97,6 @@
             cursor: pointer;
         }
 
-        /* ルール説明エリア */
         #instructions {
             grid-area: instructions;
             font-size: 14px;
@@ -129,4 +117,33 @@
         <h1>🔢 タッチ！足し算ゲーム</h1>
         <div id="status-bar">
             <div>スコア: <span id="score">0</span></div>
-            <div>残り時間: <span id="timer">60</span>秒
+            <div>残り時間: <span id="timer">60</span>秒</div>
+        </div>
+        
+        <div id="numbers">
+            <div id="left-num" class="number-box">?</div>
+            <div id="right-num" class="number-box">?</div>
+        </div>
+
+        <div id="message" class="message"></div>
+        
+        <button id="start-button">ゲームスタート！</button>
+
+        <div id="controls" style="display: none;">
+            <button id="up-btn" class="control-button" data-key="ArrowUp">↑</button>
+            <button id="left-btn" class="control-button" data-key="ArrowLeft">←</button>
+            <button id="right-btn" class="control-button" data-key="ArrowRight">→</button>
+            <button id="down-btn" class="control-button" data-key="ArrowDown">↓</button>
+        </div>
+
+        <div id="instructions">
+            <p><span class="highlight">↑</span>: **足して 10** になる (例: 5, 5)</p>
+            <p><span class="highlight">←</span>: 左の数字が**大きい** (例: 8, 2)</p>
+            <p><span class="highlight">→</span>: 右の数字が**大きい** (例: 1, 9)</p>
+            <p><span class="highlight">↓</span>: 左右の数字が**等しい** (例: 4, 4)</p>
+        </div>
+    </div>
+
+    <script src="addition_game_touch.js"></script>
+</body>
+</html>
